@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: collectd
+  labels:
+    app: collectd
+spec:
+  selector:
+    matchLabels:
+      name: collectd
+  template:
+    metadata:
+      labels:
+        name: collectd
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
+      containers:
+      - name: collectd
+        image: gar-registry.caas.intel.com/virtiot/collectd:1.0
+        securityContext:
+          privileged: true
+        command: [ "/opt/collectd/sbin/collectd", "-C", "/etc/edge-ai/collectd/collectd.conf", "-f"]
+        ports:
+          - name: metrics
+            containerPort: 9103
+        volumeMounts:
+        - mountPath: /data/kmb
+          name: kmb-vol
+        - mountPath: /etc/edge-ai/collectd
+          name: collectd-vol
+        - mountPath: /dev/mem
+          name: kmb-mem
+      volumes:
+      - name: kmb-vol
+        hostPath:
+          path: /data/kmb
+          type: Directory
+      - name: collectd-vol
+        hostPath:
+          path: /etc/edge-ai/collectd
+          type: Directory
+      - name: kmb-mem
+        hostPath:
+          path: /dev/mem
+          type: File
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: collectd-svc
+  labels:
+    app: collectd-svc
+spec:
+  selector:
+    name: collectd
+  ports:
+  - name: metrics
+    port: 9103
+    targetPort: metrics

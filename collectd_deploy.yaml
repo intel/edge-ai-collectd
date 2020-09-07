@@ -20,6 +20,7 @@ spec:
         image: gar-registry.caas.intel.com/virtiot/collectd:1.0
         securityContext:
           privileged: true
+          readOnlyRootFilesystem: true
         command: [ "/opt/collectd/sbin/collectd", "-C", "/etc/edge-ai/collectd/collectd.conf", "-f"]
         ports:
           - name: metrics

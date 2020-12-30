@@ -35,8 +35,11 @@ FROM ubuntu:20.04
 RUN \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install libpython3.8 libprotobuf-c1 libmicrohttpd12 \
+  nginx \
   && apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /opt/collectd  /opt/collectd
+COPY default.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 

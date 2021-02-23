@@ -128,7 +128,6 @@ spec:
         image: nginx:latest
         imagePullPolicy : IfNotPresent
         securityContext:
-          privileged: true
           readOnlyRootFilesystem: true
         ports:
           - name: metrics

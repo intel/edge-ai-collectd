@@ -35,6 +35,7 @@ spec:
         args:
           - -c
           - >-
+              cp -R /inginx/nginx/* /var/lib/nginx &&
               /usr/sbin/nginx &&
               /opt/collectd/sbin/collectd -C /etc/edge-ai/collectd/collectd.conf -f;
         ports:

@@ -28,7 +28,7 @@ FROM  alpine:latest
 #    && adduser -S -D -H -u 101 -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx
 
 RUN apk update
-RUN apk add --upgrade nginx-doc
+RUN apk add --upgrade nginx
 RUN apk add --upgrade nettle-dev
 RUN apk add --upgrade apk-tools-static
 RUN apk add --upgrade openssl-dev

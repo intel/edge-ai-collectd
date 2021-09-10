@@ -9,7 +9,7 @@ RUN apk add  curl-dev postgresql-dev python3-dev \
     hiredis-dev varnish-dev protobuf-c-dev
 RUN apk add --upgrade openssl-dev
 RUN apk add --upgrade nettle-dev
-RUN apk add --upgrade apk-tools-static
+RUN apk add --upgrade apk-tools-static && apk add --upgrade apk-tools
 
 RUN mkdir -p /opt/toolchain && \
     cd /opt/toolchain && \
@@ -31,6 +31,7 @@ RUN apk update
 RUN apk add --upgrade nginx
 RUN apk add --upgrade nettle-dev
 RUN apk add --upgrade apk-tools-static
+RUN apk add --upgrade apk-tools
 RUN apk add --upgrade openssl-dev
 RUN set -x &&\
     apk add --no-cache python3-dev  libmicrohttpd  protobuf-c-dev && \

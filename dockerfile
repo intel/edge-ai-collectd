@@ -22,16 +22,15 @@ RUN mkdir -p /opt/toolchain && \
 
 
 
-FROM  alpine:latest
+FROM  alpine:3.13
 
 #RUN addgroup -g 101 -S nginx \
 #    && adduser -S -D -H -u 101 -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx
 
 RUN apk update
 RUN apk add --upgrade nginx
-RUN apk add --upgrade nettle-dev
-RUN apk add --upgrade apk-tools-static
-RUN apk add --upgrade apk-tools
+RUN apk add --upgrade nettle-dev && apk add --upgrade nettle-static
+RUN apk add --upgrade apk-tools && apk add --upgrade apk-tools-static
 RUN apk add --upgrade openssl-dev
 RUN set -x &&\
     apk add --no-cache python3-dev  libmicrohttpd  protobuf-c-dev && \

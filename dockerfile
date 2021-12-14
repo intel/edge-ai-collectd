@@ -7,7 +7,7 @@ RUN apk add  curl-dev postgresql-dev python3-dev \
     libgcrypt-dev mariadb-dev zlib-dev iptables-dev \
     yajl-dev libxml2-dev openjdk8 \
     hiredis-dev varnish-dev protobuf-c-dev
-RUN apk add --upgrade openssl-dev
+RUN apk add --upgrade openssl-dev && apk add --upgrade busybox
 RUN apk add --upgrade nettle-dev
 RUN apk add --upgrade apk-tools-static && apk add --upgrade apk-tools
 
@@ -31,7 +31,7 @@ RUN apk update
 RUN apk add --upgrade nginx
 RUN apk add --upgrade nettle-dev && apk add --upgrade nettle-static
 RUN apk add --upgrade apk-tools && apk add --upgrade apk-tools-static
-RUN apk add --upgrade openssl-dev
+RUN apk add --upgrade openssl-dev && apk add --upgrade busybox
 RUN set -x &&\
     apk add --no-cache python3-dev  libmicrohttpd  protobuf-c-dev && \
     mkdir -p /var/lib/nginx/tmp /var/lib/nginx/logs  /run/nginx && \
